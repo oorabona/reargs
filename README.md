@@ -7,17 +7,16 @@ RegExp based command line arguments parser.
 [![GitHub Project][github-image]][github-url]
 [![API Documentation][api-docs-image]][API documentation]
 
-[npm-image]: https://img.shields.io/npm/v/@oorabona/reargs.svg?logo=npm
-[npm-url]: https://www.npmjs.com/package/@oorabona/reargs
-[build-status-img]: https://github.com/oorabona/reargs/workflows/Build/badge.svg
-[build-status-link]: https://github.com/oorabona/reargs/actions?query=workflow%3ABuild
+[npm-image]: https://img.shields.io/npm/v/reargs.svg?logo=npm
+[npm-url]: https://www.npmjs.com/package/reargs
 [github-image]: https://img.shields.io/static/v1?logo=github&label=GitHub&message=project&color=informational
 [github-url]: https://github.com/oorabona/reargs
 [API documentation]: https://oorabona.github.io/reargs/
 
 ## So why another argument parser library ?
 
-None of the ones I found are leveraging the power of RegExp although they allow great flexibility.
+None of the ones I found are leveraging the power of RegExp ! :wink:
+> With great power comes great responsability !
 
 ```sh
 $ prog -m swagger dump api from https://api.endpoint.io -- do not parse
@@ -208,6 +207,36 @@ const allValues = myArgs.getAllValues() // returns { topic: undefined }
 1. If an argument has a capturing group, its value is propagated
 2. If no value could be found on the command line the default one, if it exists, will be propagated instead
 3. You can have the same name between capturing group name and parameter name
+
+#### Default values
+
+Now let's consider the following example with default values :
+
+```js
+// Definition
+const myArgs = new Reargs({
+  help: {
+    help: 'this help or additional help on a given topic',
+    short: '((?<topic>[\\w|\\/]+) )?-h',
+    long: 'help( (?<topic>[\\w|\\/]+))?',
+    humanReadable: 'help [topic], [topic] -h',
+    values: {
+      topic: 'general'
+    }
+  }
+})
+const unparsable = myArgs.parse(process.argv.slice(2))
+const valueOfParam = myArgs.getValue('help', 'topic')
+```
+
+If the program is called with only `help` as argument, the following will be true:
+
+```js
+const topic = myArgs.getValue('help', 'topic') // topic: 'general'
+const help = myArgs.getValue('help') // returns { topic: 'general' }
+const groupValues = myArgs.getGroupValues('_') // returns { topic: 'general' }
+const allValues = myArgs.getAllValues() // returns { topic: 'general' }
+```
 
 ### Generate Help
 
