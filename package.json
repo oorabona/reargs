@@ -1,6 +1,6 @@
 {
   "name": "reargs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RegExp based command line argument parser",
   "main": "index.js",
   "module": "lib/reargs.mjs",
