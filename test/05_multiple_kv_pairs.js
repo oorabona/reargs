@@ -166,7 +166,7 @@ describe('Advanced usage, multiple occurrences', () => {
       ]
     })
 
-    assert.deepEqual(myArgs.getValue('kv1', 'key'), ['key1','key2','key3','defaultKey'])
+    assert.deepEqual(myArgs.getValue('kv1', 'key'), ['key1', 'key2', 'key3', 'defaultKey'])
     assert.deepEqual(myArgs.getValue('kv2'), {
       key2: [
         'key1',
@@ -179,7 +179,7 @@ describe('Advanced usage, multiple occurrences', () => {
         'value2',
         'defaultValue2',
         'value4'
-      ],
+      ]
     })
     assert.deepEqual(myArgs.getGroupValues('kv3'), {
       key3: [
