@@ -35,8 +35,8 @@ const example = {
   },
   useApiSubset: {
     help: 'Use API subset (default: me)',
-    short: /-u[=| ](?<apiSubset>[\w|/]+)/,
-    long: /api subset use (?<apiSubset>[\w|/]+)/,
+    short: '-u[=| ](?<apiSubset>[\\w|/]+)',
+    long: 'api subset use (?<apiSubset>[\\w|/]+)',
     group: 'option',
     values: {
       apiSubset: 'me'
@@ -92,10 +92,9 @@ describe('Parsing command line switches', () => {
   })
 
   it('should be able to parse against empty argument list', () => {
-    test.parse([])
-    // assert.strictEqual(message, [
-    //   "param: short of type string | _param: /\\s*-[-]?d(ebug)?(\\s|$)/ | _param.humanReadable: -[-]?d(ebug)?param: short of type string | _param: /\\s*help|-[-]?h(elp)?(\\s|$)/ | _param.humanReadable: help|-[-]?h(elp)?param: short of type string | _param: /\\s*-l(\\s|$)/ | _param.humanReadable: -lparam: long of type string | _param: /\\s*api subsets( ls)?(\\s|$)/ | _param.humanReadable: api subsets( ls)?param: short of type string | _param: /\\s*ls(\\s|$)/ | _param.humanReadable: lsparam: long of type string | _param: /\\s*list(\\s|$)/ | _param.humanReadable: listparam: short of type string | _param: /\\s*sh(ell)?(\\s|$)/ | _param.humanReadable: sh(ell)?param: short of type object | _param: /-u[=| ](?<apiSubset>[\\w|/]+)/ | _param.humanReadable: -u[=| ]<apiSubset>param: long of type object | _param: /api subset use (?<apiSubset>[\\w|/]+)/ | _param.humanReadable: api subset use <apiSubset>_args is now : ''arg='' pType='short' re='/\\s*-[-]?d(ebug)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*help|-[-]?h(elp)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-l(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*api subsets( ls)?(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*ls(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*list(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*sh(ell)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/-u[=| ](?<apiSubset>[\\w|/]+)/' matchGroups='null'arg='' pType='long' re='/api subset use (?<apiSubset>[\\w|/]+)/' matchGroups='null'"
-    // ].join('\n'))
+    const unparsable = test.parse([])
+    assert.strictEqual(unparsable, '')
+    assert.strictEqual(test.remain, '')
 
     assert.deepEqual(test.getGroupValues('command'), {
       help: false,
@@ -146,16 +145,12 @@ describe('Parsing command line switches', () => {
       shellOperation: false
     })
 
-    // assert.strictEqual(message, [
-    //   "_args is now : 'listapi foo'arg='listapi foo' pType='short' re='/\\s*-[-]?d(ebug)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'listapi foo'arg='listapi foo' pType='short' re='/\\s*help|-[-]?h(elp)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'listapi foo'arg='listapi foo' pType='short' re='/\\s*-l(\\s|$)/' matchGroups='null'arg='listapi foo' pType='long' re='/\\s*api subsets( ls)?(\\s|$)/' matchGroups='null'_args is now : 'listapi foo'arg='listapi foo' pType='short' re='/\\s*ls(\\s|$)/' matchGroups='null'arg='listapi foo' pType='long' re='/\\s*list(\\s|$)/' matchGroups='null'_args is now : 'listapi foo'arg='listapi foo' pType='short' re='/\\s*sh(ell)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'listapi foo'arg='listapi foo' pType='short' re='/-u[=| ](?<apiSubset>[\\w|/]+)/' matchGroups='null'arg='listapi foo' pType='long' re='/api subset use (?<apiSubset>[\\w|/]+)/' matchGroups='null'param = 'help' values = falseparam = 'listApiSubsets' values = falseparam = 'listOperation' values = falseparam = 'shellOperation' values = false"
-    // ].join('\n'))
-
     assert.deepEqual(test.getGroupValues('option'), {
       apiSubset: 'me',
       debug: false
     })
 
-    assert.strictEqual(unparsed, 'listapi foo')
+    assert.strictEqual(unparsed, 'listapi\x00foo')
     assert.strictEqual(test.remain, '')
 
     assert.deepEqual(test.getAllValues(), {
@@ -179,26 +174,18 @@ describe('Parsing command line switches', () => {
       shellOperation: false
     })
 
-    // assert.strictEqual(message, [
-    //   "_args is now : 'list foo api'arg='list foo api' pType='short' re='/\\s*-[-]?d(ebug)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'list foo api'arg='list foo api' pType='short' re='/\\s*help|-[-]?h(elp)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'list foo api'arg='list foo api' pType='short' re='/\\s*-l(\\s|$)/' matchGroups='null'arg='list foo api' pType='long' re='/\\s*api subsets( ls)?(\\s|$)/' matchGroups='null'_args is now : 'list foo api'arg='list foo api' pType='short' re='/\\s*ls(\\s|$)/' matchGroups='null'arg='list foo api' pType='long' re='/\\s*list(\\s|$)/' matchGroups='list , 'before slice _args : 'list foo api' found : 'list 'after slice _args : 'foo api'_args is now : 'foo api'arg='foo api' pType='short' re='/\\s*sh(ell)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'foo api'arg='foo api' pType='short' re='/-u[=| ](?<apiSubset>[\\w|/]+)/' matchGroups='null'arg='foo api' pType='long' re='/api subset use (?<apiSubset>[\\w|/]+)/' matchGroups='null'_args is now : 'foo api'arg='foo api' pType='short' re='/\\s*-[-]?d(ebug)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'foo api'arg='foo api' pType='short' re='/\\s*help|-[-]?h(elp)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'foo api'arg='foo api' pType='short' re='/\\s*-l(\\s|$)/' matchGroups='null'arg='foo api' pType='long' re='/\\s*api subsets( ls)?(\\s|$)/' matchGroups='null'_args is now : 'foo api'arg='foo api' pType='short' re='/\\s*ls(\\s|$)/' matchGroups='null'arg='foo api' pType='long' re='/\\s*list(\\s|$)/' matchGroups='null'_args is now : 'foo api'arg='foo api' pType='short' re='/\\s*sh(ell)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'foo api'arg='foo api' pType='short' re='/-u[=| ](?<apiSubset>[\\w|/]+)/' matchGroups='null'arg='foo api' pType='long' re='/api subset use (?<apiSubset>[\\w|/]+)/' matchGroups='null'param = 'help' values = falseparam = 'listApiSubsets' values = falseparam = 'listOperation' values = trueparam = 'shellOperation' values = false"
-    // ].join('\n'))
-
     assert.deepEqual(test.getGroupValues('option'), {
       apiSubset: 'me',
       debug: false
     })
 
-    assert.strictEqual(unparsed, 'foo api')
+    assert.strictEqual(unparsed, 'foo\x00api')
     assert.strictEqual(test.remain, '')
   })
 
   it('should be able to parse multiple (right and wrong) commands and options', () => {
     message = ''
     const unparsed = test.parse(['list', '-u', 'foo', 'api'])
-
-    // assert.strictEqual(message, [
-    //   "_args is now : 'list -u foo api'arg='list -u foo api' pType='short' re='/\\s*-[-]?d(ebug)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'list -u foo api'arg='list -u foo api' pType='short' re='/\\s*help|-[-]?h(elp)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'list -u foo api'arg='list -u foo api' pType='short' re='/\\s*-l(\\s|$)/' matchGroups='null'arg='list -u foo api' pType='long' re='/\\s*api subsets( ls)?(\\s|$)/' matchGroups='null'_args is now : 'list -u foo api'arg='list -u foo api' pType='short' re='/\\s*ls(\\s|$)/' matchGroups='null'arg='list -u foo api' pType='long' re='/\\s*list(\\s|$)/' matchGroups='list , 'before slice _args : 'list -u foo api' found : 'list 'after slice _args : '-u foo api'_args is now : '-u foo api'arg='-u foo api' pType='short' re='/\\s*sh(ell)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-u foo api'arg='-u foo api' pType='short' re='/-u[=| ](?<apiSubset>[\\w|/]+)/' matchGroups='-u foo,foo'arg=' api' pType='long' re='/api subset use (?<apiSubset>[\\w|/]+)/' matchGroups='null'before slice _args : '-u foo api' found : '-u foo'after slice _args : ' api'_args is now : 'api'arg='api' pType='short' re='/\\s*-[-]?d(ebug)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'api'arg='api' pType='short' re='/\\s*help|-[-]?h(elp)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'api'arg='api' pType='short' re='/\\s*-l(\\s|$)/' matchGroups='null'arg='api' pType='long' re='/\\s*api subsets( ls)?(\\s|$)/' matchGroups='null'_args is now : 'api'arg='api' pType='short' re='/\\s*ls(\\s|$)/' matchGroups='null'arg='api' pType='long' re='/\\s*list(\\s|$)/' matchGroups='null'_args is now : 'api'arg='api' pType='short' re='/\\s*sh(ell)?(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : 'api'arg='api' pType='short' re='/-u[=| ](?<apiSubset>[\\w|/]+)/' matchGroups='null'arg='api' pType='long' re='/api subset use (?<apiSubset>[\\w|/]+)/' matchGroups='null'"
-    // ].join('\n'))
 
     assert.deepEqual(test.getGroupValues('command'), {
       help: false,

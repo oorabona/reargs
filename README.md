@@ -82,9 +82,9 @@ const params = {
     humanReadable: '-h, --help',
     help: 'this help',
     stopParse: true,
-    hidden: true,
-    multiple: true,
-    captureMultiple: '',
+    hidden: false,
+    multiple: false,
+    // captureMultiple: '',
     values: false
   }
 }
@@ -139,6 +139,7 @@ const opts = {
   prePaddingSpaces: 2,
   alignLongIfNoShort: 4,
   exitOnStop: false,
+  nunjucksAutoEscape: false,
 }
 ```
 
@@ -151,6 +152,8 @@ const opts = {
 * `alignLongIfNoShort` adds that many spaces before arguments that have no `short` property, to have a cleaner alignment with arguments having both `short` and `long` properties set.
 
 * `exitOnStop` if set, stops immediately parsing when a parameter with `stopParse` property set to **true** is found, not evaluating anything else.
+
+* `nunjucksAutoEscape` is set to **false** by default in `Reargs` but by default set to **true** upstream. Since we are dealing with CLI, there should not be any mishaps by disabling safety guards.
 
 > **Note**
 Although discouraged, `paramDescriptionSpacer` and `prePaddingSpaces` can be overriden ultimately in the template, because they are arguments of [padEnd](#padEnd) `Jinja2`-like modifier.
@@ -178,8 +181,9 @@ const unparsable = myArgs.parse(process.argv.slice(2))
 Yep that's it ! It takes an `Array` as input argument, and returns the **unparsed** tokens.
 
 > **Note**
-The difference between `unparsed` and `remain` lies in that `remain` has never been given a chance to be parsed.
-On the contrary, what is returned by the `parse` function has been given a chance to be parsed, unsuccesfully.
+> The difference between `unparsed` and `remain` lies in that `remain` has never been given a chance to be parsed.
+> On the contrary, what is returned by the `parse` function has been given a chance to be parsed, unsuccesfully.
+> Both `remain` and `unparsable` will be returned as string with `\x00` special character. This is by design to allow arguments to have spaces in them. When you want to deal with positional arguments, you just have to `split('\x00')` to get a proper `Array` for whatever your needs would be.
 
 ### Retrieving values
 

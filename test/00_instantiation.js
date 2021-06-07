@@ -75,7 +75,7 @@ describe('Instantiation of Rearg class', () => {
     })
 
     assert.strictEqual(message, [
-      'param: short of type string | _param: /\\s*foo(\\s|$)/ | _param.humanReadable: fooparam: short of type string | _param: /\\s*bar(\\s|$)/ | _param.humanReadable: barparam: short of type string | _param: /\\s*baz(\\s|$)/ | _param.humanReadable: bazparam: short of type string | _param: /\\s*foo(\\s|$)/ | _param.humanReadable: fooparam: short of type string | _param: /\\s*bar(\\s|$)/ | _param.humanReadable: barparam: short of type object | _param: /baz/ | _param.humanReadable: bazparam: short of type string | _param: /\\s*foo(\\s|$)/ | _param.humanReadable: fooparam: short of type string | _param: /\\s*bar(\\s|$)/ | _param.humanReadable: bar'
+      'param: short of type string | _param: /\x00*foo(\x00|$)/ | _param.humanReadable: fooparam: short of type string | _param: /\x00*bar(\x00|$)/ | _param.humanReadable: barparam: short of type string | _param: /\x00*baz(\x00|$)/ | _param.humanReadable: bazparam: short of type string | _param: /\x00*foo(\x00|$)/ | _param.humanReadable: fooparam: short of type string | _param: /\x00*bar(\x00|$)/ | _param.humanReadable: barparam: short of type object | _param: /\x00*baz(\x00|$)/ | _param.humanReadable: bazparam: short of type string | _param: /\x00*foo(\x00|$)/ | _param.humanReadable: fooparam: short of type string | _param: /\x00*bar(\x00|$)/ | _param.humanReadable: bar'
     ].join('\n'))
   })
 
@@ -96,7 +96,7 @@ describe('Instantiation of Rearg class', () => {
     })
 
     assert.strictEqual(message, [
-      'param: long of type string | _param: /\\s*foo(\\s|$)/ | _param.humanReadable: fooparam: long of type string | _param: /\\s*bar(\\s|$)/ | _param.humanReadable: barparam: long of type string | _param: /\\s*baz(\\s|$)/ | _param.humanReadable: bazparam: long of type string | _param: /\\s*foo(\\s|$)/ | _param.humanReadable: fooparam: long of type string | _param: /\\s*bar(\\s|$)/ | _param.humanReadable: barparam: long of type object | _param: /baz/ | _param.humanReadable: bazparam: long of type string | _param: /\\s*foo(\\s|$)/ | _param.humanReadable: fooparam: long of type string | _param: /\\s*bar(\\s|$)/ | _param.humanReadable: bar'
+      'param: long of type string | _param: /\x00*foo(\x00|$)/ | _param.humanReadable: fooparam: long of type string | _param: /\x00*bar(\x00|$)/ | _param.humanReadable: barparam: long of type string | _param: /\x00*baz(\x00|$)/ | _param.humanReadable: bazparam: long of type string | _param: /\x00*foo(\x00|$)/ | _param.humanReadable: fooparam: long of type string | _param: /\x00*bar(\x00|$)/ | _param.humanReadable: barparam: long of type object | _param: /\x00*baz(\x00|$)/ | _param.humanReadable: bazparam: long of type string | _param: /\x00*foo(\x00|$)/ | _param.humanReadable: fooparam: long of type string | _param: /\x00*bar(\x00|$)/ | _param.humanReadable: bar'
     ].join('\n'))
   })
 

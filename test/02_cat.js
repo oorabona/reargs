@@ -114,7 +114,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         hidden: true,
         humanReadable: '-v(E|T|ET)',
-        short: /\s*-v(?<V>E|T|ET|TE)(\s|$)/,
+        short: new RegExp(`\x00*-v(?<V>E|T|ET|TE)(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -123,7 +123,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'equivalent to -vE',
         humanReadable: '-e',
-        short: /\s*-e(\s|$)/,
+        short: new RegExp(`\x00*-e(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -132,7 +132,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'equivalent to -vT',
         humanReadable: '-t',
-        short: /\s*-t(\s|$)/,
+        short: new RegExp(`\x00*-t(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -141,7 +141,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: '(ignored)',
         humanReadable: '-u',
-        short: /\s*-u(\s|$)/,
+        short: new RegExp(`\x00*-u(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -150,7 +150,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         hidden: true,
         humanReadable: '--',
-        short: /\s*--(\s|$)/,
+        short: new RegExp(`\x00*--(\x00|$)`),
         stopParse: true,
         values: false,
         multiple: false
@@ -159,7 +159,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'display this help and exit',
         humanReadable: '    --help',
-        long: /\s*--help(\s|$)/,
+        long: new RegExp(`\x00*--help(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -168,8 +168,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'number nonempty output lines, overrides -n',
         humanReadable: '-b, --number-nonblank',
-        long: /\s*--number-nonblank(\s|$)/,
-        short: /\s*-b(\s|$)/,
+        long: new RegExp(`\x00*--number-nonblank(\x00|$)`),
+        short: new RegExp(`\x00*-b(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -178,8 +178,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'number all output lines',
         humanReadable: '-n, --number',
-        long: /\s*--number(\s|$)/,
-        short: /\s*-n(\s|$)/,
+        long: new RegExp(`\x00*--number(\x00|$)`),
+        short: new RegExp(`\x00*-n(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -188,8 +188,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'equivalent to -vET',
         humanReadable: '-A, --show-all',
-        long: /\s*--show-all(\s|$)/,
-        short: /\s*-A(\s|$)/,
+        long: new RegExp(`\x00*--show-all(\x00|$)`),
+        short: new RegExp(`\x00*-A(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -198,8 +198,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'display $ at end of each line',
         humanReadable: '-E, --show-ends',
-        long: /\s*--show-ends(\s|$)/,
-        short: /\s*-E(\s|$)/,
+        long: new RegExp(`\x00*--show-ends(\x00|$)`),
+        short: new RegExp(`\x00*-E(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -208,8 +208,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'use ^ and M- notation, except for LFD and TAB',
         humanReadable: '-v, --show-nonprinting',
-        long: /\s*--show-nonprinting(\s|$)/,
-        short: /\s*-v(\s|$)/,
+        long: new RegExp(`\x00*--show-nonprinting(\x00|$)`),
+        short: new RegExp(`\x00*-v(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -218,8 +218,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'display TAB characters as ^I',
         humanReadable: '-T, --show-tabs',
-        long: /\s*--show-tabs(\s|$)/,
-        short: /\s*-T(\s|$)/,
+        long: new RegExp(`\x00*--show-tabs(\x00|$)`),
+        short: new RegExp(`\x00*-T(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -228,8 +228,8 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'suppress repeated empty output lines',
         humanReadable: '-s, --squeeze-blank',
-        long: /\s*--squeeze-blank(\s|$)/,
-        short: /\s*-s(\s|$)/,
+        long: new RegExp(`\x00*--squeeze-blank(\x00|$)`),
+        short: new RegExp(`\x00*-s(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -238,7 +238,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         help: 'output version information and exit',
         humanReadable: '    --version',
-        long: /\s*--version(\s|$)/,
+        long: new RegExp(`\x00*--version(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -247,7 +247,7 @@ describe('Parsing \'cat\' command line', () => {
         group: '_',
         hidden: true,
         humanReadable: '-',
-        short: /\s*-(\s|$)/,
+        short: new RegExp(`\x00*-(\x00|$)`),
         stopParse: false,
         values: false,
         multiple: false
@@ -422,7 +422,7 @@ describe('Parsing \'cat\' command line', () => {
     assert.strictEqual(cat.remain, '--version')
 
     assert.strictEqual(message, [
-      "arg='-e -- --version' pType='short' re='/\\s*--(\\s|$)/' matchGroups=' -- , 'currentParam[pType] = undefined_args is now : '-e'arg='-e' pType='short' re='/\\s*-A(\\s|$)/' matchGroups='null'arg='-e' pType='long' re='/\\s*--show-all(\\s|$)/' matchGroups='null'_args is now : '-e'arg='-e' pType='short' re='/\\s*-b(\\s|$)/' matchGroups='null'arg='-e' pType='long' re='/\\s*--number-nonblank(\\s|$)/' matchGroups='null'_args is now : '-e'arg='-e' pType='short' re='/\\s*-e(\\s|$)/' matchGroups='-e,'currentParam[pType] = undefinedbefore slice _args : '-e' found : '-e'after slice _args : ''_args is now : ''arg='' pType='short' re='/\\s*-E(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-ends(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-n(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--number(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-s(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--squeeze-blank(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-t(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-T(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-tabs(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-u(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-v(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-nonprinting(\\s|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\\s*--help(\\s|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\\s*--version(\\s|$)/' matchGroups='null'_args is now : ''_args is now : ''arg='' pType='short' re='/\\s*-v(?<V>E|T|ET|TE)(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-A(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-all(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-b(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--number-nonblank(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-e(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-E(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-ends(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-n(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--number(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-s(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--squeeze-blank(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-t(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-T(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-tabs(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-u(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-v(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-nonprinting(\\s|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\\s*--help(\\s|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\\s*--version(\\s|$)/' matchGroups='null'_args is now : ''_args is now : ''arg='' pType='short' re='/\\s*-v(?<V>E|T|ET|TE)(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-(\\s|$)/' matchGroups='null'currentParam[pType] = undefinedparam = 'showAll' values = falseparam = 'nonBlank' values = falseparam = 'dashE' values = trueparam = 'showEnds' values = falseparam = 'number' values = falseparam = 'squeezeBlank' values = falseparam = 'dashT' values = falseparam = 'showTabs' values = falseparam = 'dashU' values = falseparam = 'showNonPrinting' values = falseparam = 'help' values = falseparam = 'version' values = falseparam = 'doubleDash' values = trueparam = 'alternateV' values = falseparam = 'useStdin' values = false"
+      "arg='-e\x00--\x00--version' pType='short' re='/\x00*--(\x00|$)/' matchGroups='\x00--\x00,\x00'currentParam[pType] = undefined_args is now : '-e'arg='-e' pType='short' re='/\x00*-A(\x00|$)/' matchGroups='null'arg='-e' pType='long' re='/\x00*--show-all(\x00|$)/' matchGroups='null'_args is now : '-e'arg='-e' pType='short' re='/\x00*-b(\x00|$)/' matchGroups='null'arg='-e' pType='long' re='/\x00*--number-nonblank(\x00|$)/' matchGroups='null'_args is now : '-e'arg='-e' pType='short' re='/\x00*-e(\x00|$)/' matchGroups='-e,'currentParam[pType] = undefinedbefore slice _args : '-e' found : '-e'after slice _args : ''_args is now : ''arg='' pType='short' re='/\x00*-E(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-ends(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-n(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--number(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-s(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--squeeze-blank(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-t(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-T(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-tabs(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-u(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-v(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-nonprinting(\x00|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\x00*--help(\x00|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\x00*--version(\x00|$)/' matchGroups='null'_args is now : ''_args is now : ''arg='' pType='short' re='/\x00*-v(?<V>E|T|ET|TE)(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-A(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-all(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-b(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--number-nonblank(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-e(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-E(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-ends(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-n(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--number(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-s(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--squeeze-blank(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-t(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-T(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-tabs(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-u(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-v(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-nonprinting(\x00|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\x00*--help(\x00|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\x00*--version(\x00|$)/' matchGroups='null'_args is now : ''_args is now : ''arg='' pType='short' re='/\x00*-v(?<V>E|T|ET|TE)(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-(\x00|$)/' matchGroups='null'currentParam[pType] = undefinedparam = 'showAll' values = falseparam = 'nonBlank' values = falseparam = 'dashE' values = trueparam = 'showEnds' values = falseparam = 'number' values = falseparam = 'squeezeBlank' values = falseparam = 'dashT' values = falseparam = 'showTabs' values = falseparam = 'dashU' values = falseparam = 'showNonPrinting' values = falseparam = 'help' values = falseparam = 'version' values = falseparam = 'doubleDash' values = trueparam = 'alternateV' values = falseparam = 'useStdin' values = false"
     ].join('\n'))
   })
 
@@ -451,7 +451,7 @@ describe('Parsing \'cat\' command line', () => {
     })
 
     assert.strictEqual(message, [
-      "arg='-e - -- --version' pType='short' re='/\\s*--(\\s|$)/' matchGroups=' -- , 'currentParam[pType] = undefined_args is now : '-e -'arg='-e -' pType='short' re='/\\s*-A(\\s|$)/' matchGroups='null'arg='-e -' pType='long' re='/\\s*--show-all(\\s|$)/' matchGroups='null'_args is now : '-e -'arg='-e -' pType='short' re='/\\s*-b(\\s|$)/' matchGroups='null'arg='-e -' pType='long' re='/\\s*--number-nonblank(\\s|$)/' matchGroups='null'_args is now : '-e -'arg='-e -' pType='short' re='/\\s*-e(\\s|$)/' matchGroups='-e , 'currentParam[pType] = undefinedbefore slice _args : '-e -' found : '-e 'after slice _args : '-'_args is now : '-'arg='-' pType='short' re='/\\s*-E(\\s|$)/' matchGroups='null'arg='-' pType='long' re='/\\s*--show-ends(\\s|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\\s*-n(\\s|$)/' matchGroups='null'arg='-' pType='long' re='/\\s*--number(\\s|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\\s*-s(\\s|$)/' matchGroups='null'arg='-' pType='long' re='/\\s*--squeeze-blank(\\s|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\\s*-t(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-'arg='-' pType='short' re='/\\s*-T(\\s|$)/' matchGroups='null'arg='-' pType='long' re='/\\s*--show-tabs(\\s|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\\s*-u(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-'arg='-' pType='short' re='/\\s*-v(\\s|$)/' matchGroups='null'arg='-' pType='long' re='/\\s*--show-nonprinting(\\s|$)/' matchGroups='null'_args is now : '-'currentParam[pType] = undefinedarg='-' pType='long' re='/\\s*--help(\\s|$)/' matchGroups='null'_args is now : '-'currentParam[pType] = undefinedarg='-' pType='long' re='/\\s*--version(\\s|$)/' matchGroups='null'_args is now : '-'_args is now : '-'arg='-' pType='short' re='/\\s*-v(?<V>E|T|ET|TE)(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-'arg='-' pType='short' re='/\\s*-(\\s|$)/' matchGroups='-,'currentParam[pType] = undefinedbefore slice _args : '-' found : '-'after slice _args : ''_args is now : ''arg='' pType='short' re='/\\s*-A(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-all(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-b(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--number-nonblank(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-e(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-E(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-ends(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-n(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--number(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-s(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--squeeze-blank(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-t(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-T(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-tabs(\\s|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\\s*-u(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-v(\\s|$)/' matchGroups='null'arg='' pType='long' re='/\\s*--show-nonprinting(\\s|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\\s*--help(\\s|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\\s*--version(\\s|$)/' matchGroups='null'_args is now : ''_args is now : ''arg='' pType='short' re='/\\s*-v(?<V>E|T|ET|TE)(\\s|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\\s*-(\\s|$)/' matchGroups='null'currentParam[pType] = undefinedparam = 'showAll' values = falseparam = 'nonBlank' values = falseparam = 'dashE' values = trueparam = 'showEnds' values = falseparam = 'number' values = falseparam = 'squeezeBlank' values = falseparam = 'dashT' values = falseparam = 'showTabs' values = falseparam = 'dashU' values = falseparam = 'showNonPrinting' values = falseparam = 'help' values = falseparam = 'version' values = falseparam = 'doubleDash' values = trueparam = 'alternateV' values = falseparam = 'useStdin' values = true"
+      "arg='-e\x00-\x00--\x00--version' pType='short' re='/\x00*--(\x00|$)/' matchGroups='\x00--\x00,\x00'currentParam[pType] = undefined_args is now : '-e\\x00-'arg='-e\x00-' pType='short' re='/\x00*-A(\x00|$)/' matchGroups='null'arg='-e\x00-' pType='long' re='/\x00*--show-all(\x00|$)/' matchGroups='null'_args is now : '-e\\x00-'arg='-e\x00-' pType='short' re='/\x00*-b(\x00|$)/' matchGroups='null'arg='-e\x00-' pType='long' re='/\x00*--number-nonblank(\x00|$)/' matchGroups='null'_args is now : '-e\\x00-'arg='-e\x00-' pType='short' re='/\x00*-e(\x00|$)/' matchGroups='-e\x00,\x00'currentParam[pType] = undefinedbefore slice _args : '-e\\x00-' found : '-e\\x00'after slice _args : '-'_args is now : '-'arg='-' pType='short' re='/\x00*-E(\x00|$)/' matchGroups='null'arg='-' pType='long' re='/\x00*--show-ends(\x00|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\x00*-n(\x00|$)/' matchGroups='null'arg='-' pType='long' re='/\x00*--number(\x00|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\x00*-s(\x00|$)/' matchGroups='null'arg='-' pType='long' re='/\x00*--squeeze-blank(\x00|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\x00*-t(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-'arg='-' pType='short' re='/\x00*-T(\x00|$)/' matchGroups='null'arg='-' pType='long' re='/\x00*--show-tabs(\x00|$)/' matchGroups='null'_args is now : '-'arg='-' pType='short' re='/\x00*-u(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-'arg='-' pType='short' re='/\x00*-v(\x00|$)/' matchGroups='null'arg='-' pType='long' re='/\x00*--show-nonprinting(\x00|$)/' matchGroups='null'_args is now : '-'currentParam[pType] = undefinedarg='-' pType='long' re='/\x00*--help(\x00|$)/' matchGroups='null'_args is now : '-'currentParam[pType] = undefinedarg='-' pType='long' re='/\x00*--version(\x00|$)/' matchGroups='null'_args is now : '-'_args is now : '-'arg='-' pType='short' re='/\x00*-v(?<V>E|T|ET|TE)(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : '-'arg='-' pType='short' re='/\x00*-(\x00|$)/' matchGroups='-,'currentParam[pType] = undefinedbefore slice _args : '-' found : '-'after slice _args : ''_args is now : ''arg='' pType='short' re='/\x00*-A(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-all(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-b(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--number-nonblank(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-e(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-E(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-ends(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-n(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--number(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-s(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--squeeze-blank(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-t(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-T(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-tabs(\x00|$)/' matchGroups='null'_args is now : ''arg='' pType='short' re='/\x00*-u(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-v(\x00|$)/' matchGroups='null'arg='' pType='long' re='/\x00*--show-nonprinting(\x00|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\x00*--help(\x00|$)/' matchGroups='null'_args is now : ''currentParam[pType] = undefinedarg='' pType='long' re='/\x00*--version(\x00|$)/' matchGroups='null'_args is now : ''_args is now : ''arg='' pType='short' re='/\x00*-v(?<V>E|T|ET|TE)(\x00|$)/' matchGroups='null'currentParam[pType] = undefined_args is now : ''arg='' pType='short' re='/\x00*-(\x00|$)/' matchGroups='null'currentParam[pType] = undefinedparam = 'showAll' values = falseparam = 'nonBlank' values = falseparam = 'dashE' values = trueparam = 'showEnds' values = falseparam = 'number' values = falseparam = 'squeezeBlank' values = falseparam = 'dashT' values = falseparam = 'showTabs' values = falseparam = 'dashU' values = falseparam = 'showNonPrinting' values = falseparam = 'help' values = falseparam = 'version' values = falseparam = 'doubleDash' values = trueparam = 'alternateV' values = falseparam = 'useStdin' values = true"
     ].join('\n'))
   })
 
